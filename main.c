@@ -1,12 +1,38 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
 
 void runShell(FILE* fp) {
+    const int argLimit = 25;
     int commandMaxLength = 512;
     char* command = (char*) malloc(commandMaxLength * sizeof(char));
 
     while (fgets(command, commandMaxLength, fp) != NULL) {
-        printf("RESULT:\n%s\n", command);
+        int i = 0;
+        char* path;
+        char* arguments[argLimit];
+        command[strcspn(command, "\r\n")] = 0;
+        char* token = strtok(command, " ");
+
+        asprintf(&path, "/bin/%s", token);
+
+        while (token != NULL) {
+            token = strtok(NULL, " ");
+            asprintf(&arguments[i++], "%s", token);
+        }
+
+        if (fork() == 0) {
+            if (i > 1) {
+                execl(path, command, arguments, NULL);
+            } else {
+                execl(path, command, NULL);
+            }
+        }
+
+        printf("\n");
+        free(path);
+        free(token);
     }
 
     free(command);
