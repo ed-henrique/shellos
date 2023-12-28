@@ -10,6 +10,14 @@ Interactive Shell made in C for fun.
 
 Made in Linux to run on a Linux machine.
 
+## Demo
+
+<div align="center">
+
+<img src="./demo.gif" alt="Run simple commands in ShellOS">
+
+</div>
+
 ## Roadmap
 
 - [x] Take user input
