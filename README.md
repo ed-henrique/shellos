@@ -1,10 +1,10 @@
-<center>
-
-[ShellOS](./logo.jpg)
+<div align="center">
+  
+<img src="./logo.png" alt="ShellOS" width=200>
 
 # ShellOS
 
-</center>
+</div>
 
 Interactive Shell made in C for fun.
 
